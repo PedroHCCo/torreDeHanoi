@@ -4,6 +4,58 @@
 
 using namespace std;
 
+bool valida_expressao(string expressao) {
+    Stack<char> pilha;
+    pilha.init(0);
+
+    for (int i = 0; i < expressao.length(); ++i) {
+        char simbolo = expressao[i];
+
+        switch (simbolo) {
+            case '(':
+            case '[':
+                // Empilha apenas os simbolos de abertura
+                if (!pilha.push(simbolo)) {
+                    pilha.destroy();
+                    return false;
+                } // overflow
+                break;
+            case ')': {
+                char topo;
+                if (pilha.empty()) {
+                    pilha.destroy();
+                    return false;
+                }
+
+                if (!pilha.pop(&topo) || topo != '(') {
+                    pilha.destroy();
+                    return false;
+                }
+                break;
+            }
+            case ']': {
+                char topo;
+                if (pilha.empty()) {
+                    pilha.destroy();
+                    return false;
+                }
+                if (!pilha.pop(&topo) || topo != '[') {
+                    pilha.destroy();
+                    return false;
+                }
+                break;
+            }
+            default:
+                // Ignora outros caracteres
+                break;
+        }
+    }
+
+    bool ok = pilha.empty();
+    pilha.destroy();
+    return ok;
+}
+
 bool detecta_palindromo(string original) {
     // string original = "arara";
     Stack<char> stack;
@@ -32,23 +84,23 @@ int main() {
     Stack<int> stack;
     stack.init(0);
 
-    std::cout << "Empilhando: 5, 10, 15\n";
+    cout << "Empilhando: 5, 10, 15\n";
     stack.push(5);
     stack.push(10);
     stack.push(15);
 
     int value = 0;
     if (stack.peek(&value)) {
-        std::cout << "Topo atual: " << value << "\n";
+        cout << "Topo atual: " << value << "\n";
     }
 
-    std::cout << "Desempilhando...\n";
+    cout << "Desempilhando...\n";
     while (stack.pop(&value)) {
-        std::cout << "Removeu: " << value << "\n";
+        cout << "Removeu: " << value << "\n";
     }
 
     if (!stack.pop(&value)) {
-        std::cout << "Underflow: pilha vazia.\n";
+        cout << "Underflow: pilha vazia.\n";
     }
 
     stack.destroy();
@@ -58,6 +110,14 @@ int main() {
     } else {
         cout << "Não é palíndromo" << endl;
     }
+
+    string exemplo1 = "([12 + (5*9)] + [24 - 5])";
+    string exemplo2 = "([)]";
+
+    cout << "Exemplo 1: " << exemplo1 << "\": "
+              << (valida_expressao(exemplo1) ? "bem formada" : "mal formada") << endl;
+    cout << "Exemplo 2: " << exemplo2 << "\": "
+              << (valida_expressao(exemplo2) ? "bem formada" : "mal formada") << endl;
 
     return 0;
 }
