@@ -1,14 +1,16 @@
 #include "stack.h"
 
-// Inicializa a pilha com tamanho maximo (0 = sem limite)
-void stack_init(Stack* stack, std::size_t max_size) {
+using namespace std;
+
+// Inicializa a pilha com tamanho máximo (0 = sem limite)
+void init(Stack* stack, size_t max_size) {
     stack->top = nullptr;
     stack->size = 0;
     stack->max_size = max_size;
 }
 
-// Libera todos os nos alocados
-void stack_destroy(Stack* stack) {
+// Libera todos os nós alocados
+void destroy(Stack* stack) {
     Node* current = stack->top;
     while (current != nullptr) {
         Node* next = current->next;
@@ -19,19 +21,23 @@ void stack_destroy(Stack* stack) {
     stack->size = 0;
 }
 
-bool stack_is_empty(const Stack* stack) {
+bool empty(const Stack* stack) {
     return stack->size == 0;
 }
 
-bool stack_is_full(const Stack* stack) {
+bool is_full(const Stack* stack) {
     if (stack->max_size == 0) {
         return false;
     }
     return stack->size >= stack->max_size;
 }
 
-bool stack_push(Stack* stack, int value) {
-    if (stack_is_full(stack)) {
+size_t size(const Stack* stack) {
+    return stack->size;
+}
+
+bool push(Stack* stack, int value) {
+    if (is_full(stack)) {
         return false;
     }
 
@@ -41,8 +47,8 @@ bool stack_push(Stack* stack, int value) {
     return true;
 }
 
-bool stack_pop(Stack* stack, int* out_value) {
-    if (stack_is_empty(stack)) {
+bool pop(Stack* stack, int* out_value) {
+    if (empty(stack)) {
         return false;
     }
 
@@ -56,8 +62,8 @@ bool stack_pop(Stack* stack, int* out_value) {
     return true;
 }
 
-bool stack_peek(const Stack* stack, int* out_value) {
-    if (stack_is_empty(stack)) {
+bool peek(const Stack* stack, int* out_value) {
+    if (empty(stack)) {
         return false;
     }
     if (out_value != nullptr) {

@@ -3,6 +3,8 @@
 
 #include <cstddef>
 
+using namespace std;
+
 struct Node {
     int value;
     Node* next;
@@ -11,29 +13,32 @@ struct Node {
 // Estrutura principal da pilha
 struct Stack {
     Node* top;
-    std::size_t size;
-    std::size_t max_size; // 0 significa sem limite
+    size_t size;
+    size_t max_size; // 0 significa sem limite
 };
 
 // Inicializa a pilha
-void stack_init(Stack* stack, std::size_t max_size);
+void init(Stack* stack, size_t max_size);
 
 // Libera todos os nos da pilha
-void stack_destroy(Stack* stack);
+void destroy(Stack* stack);
 
 // Verifica se a pilha esta vazia
-bool stack_is_empty(const Stack* stack);
+bool empty(const Stack* stack);
 
 // Verifica se a pilha esta cheia
-bool stack_is_full(const Stack* stack);
+bool is_full(const Stack* stack);
+
+// Retorna a quantidade de elementos na pilha
+size_t size(const Stack* stack);
 
 // Insere elemento no topo
-bool stack_push(Stack* stack, int value);
+bool push(Stack* stack, int value);
 
 // Remove elemento do topo e salva em out_value
-bool stack_pop(Stack* stack, int* out_value);
+bool pop(Stack* stack, int* out_value);
 
 // Retorna o elemento do topo sem remover
-bool stack_peek(const Stack* stack, int* out_value);
+bool peek(const Stack* stack, int* out_value);
 
 #endif
