@@ -35,12 +35,12 @@ struct Stack {
     }
 
     // Verifica se a pilha esta vazia
-    bool empty() const {
+    bool empty() {
         return count == 0;
     }
 
     // Verifica se a pilha esta cheia
-    bool is_full() const {
+    bool is_full() {
         if (max_size == 0) {
             return false;
         }
@@ -48,7 +48,7 @@ struct Stack {
     }
 
     // Retorna a quantidade de elementos na pilha
-    size_t size() const {
+    size_t size() {
         return count;
     }
 
@@ -81,7 +81,7 @@ struct Stack {
     }
 
     // Retorna o elemento do topo sem remover
-    bool peek(T* out_value) const {
+    bool peek(T* out_value) {
         if (empty()) {
             return false;
         }
