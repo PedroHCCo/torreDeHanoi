@@ -1,4 +1,4 @@
-# Torre de Hanói - Implementação com Pilhas
+# Torre de Hanoi - Implementação com Pilhas
 
 ## Pontos de Análise e Justificativa
 
