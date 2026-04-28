@@ -1,4 +1,4 @@
-# Torre de Hanói - Implementação com Pilhas
+# Torre de Hanoi - Implementação com Pilhas
 
 ## Descrição
 Este projeto é uma implementação em C++ da solução para o quebra-cabeça clássico da Torre de Hanói. O algoritmo utiliza recursividade para resolver o problema e emprega a estrutura de dados Pilha (Stack) para representar as três hastes (Origem, Auxiliar e Destino), garantindo que as regras de movimentação dos discos sejam rigorosamente respeitadas.
